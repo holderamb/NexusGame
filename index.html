@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=800, initial-scale=1.0">
+  <title>NexusGame</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="main-bg"></div>
+  <div id="main-wrapper">
+    <div id="ui-panel">
+      <span>Золото: <span id="goldDisplay">0</span></span>
+      <span>HP базы игрока: <span id="playerBaseHpDisplay">0</span></span>
+      <span>HP базы врага: <span id="enemyBaseHpDisplay">0</span></span>
+      <button id="ageUpButton">Переход в эпоху 2 (250 золота)</button>
+    </div>
+    <div id="unit-buttons-container"></div>
+    <canvas id="gameCanvas" width="800" height="300"></canvas>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
