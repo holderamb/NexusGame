@@ -275,6 +275,12 @@ function setupAgeUpButton() {
   }
   ageUpButtonElement.onclick = () => {
     if (currentAge < MAX_AGE && gold >= AGE_CONFIG[currentAge].upgradeCost) {
+      // Звук перехода эпохи
+      const ageUpSound = document.getElementById('ageUpSound');
+      if (ageUpSound) {
+        ageUpSound.currentTime = 0;
+        ageUpSound.play().catch(()=>{});
+      }
       gold -= AGE_CONFIG[currentAge].upgradeCost;
       currentAge++;
       playerBase.setHpForAge(currentAge);
@@ -354,6 +360,7 @@ function updateEnemyAI(deltaTime) {
   }
 }
 function updateGame(deltaTime) {
+  const deathSound = document.getElementById('deathSound');
   processPlayerSpawnQueue(deltaTime);
   updateEnemyAI(deltaTime);
   // Units move and attack
@@ -451,7 +458,13 @@ function updateGame(deltaTime) {
           if (unit.x > canvas.width - unit.width) unit.x = canvas.width - unit.width;
         }
       }
-      if (unit.hp <= 0) unit.isAlive = false;
+      if (unit.hp <= 0 && unit.isAlive) {
+        unit.isAlive = false;
+        if (deathSound) {
+          deathSound.currentTime = 0;
+          deathSound.play().catch(()=>{});
+        }
+      }
     }
   }
     // Projectiles
@@ -505,6 +518,21 @@ function gameOver(playerWin) {
   gameIsOver = true;
   playerWon = playerWin;
   gameOverMessage = playerWin ? 'Victory!' : 'Defeat!';
+  // Музыка победы/поражения
+  const music = document.getElementById('bgMusic');
+  const victoryMusic = document.getElementById('victoryMusic');
+  const defeatMusic = document.getElementById('defeatMusic');
+  if (music) music.pause();
+  if (victoryMusic) victoryMusic.pause();
+  if (defeatMusic) defeatMusic.pause();
+  if (playerWin && victoryMusic) {
+    victoryMusic.currentTime = 0;
+    victoryMusic.play().catch(()=>{});
+  }
+  if (!playerWin && defeatMusic) {
+    defeatMusic.currentTime = 0;
+    defeatMusic.play().catch(()=>{});
+  }
   // Показываем кнопку Play Again
   const replayBtn = document.getElementById('replayButton');
   if (replayBtn) replayBtn.style.display = 'block';
@@ -534,6 +562,43 @@ async function initGame() {
   enemyBaseHpDisplay = document.getElementById('enemyBaseHpDisplay');
   unitButtonsContainer = document.getElementById('unit-buttons-container');
   ageUpButtonElement = document.getElementById('ageUpButton');
+  // Музыка: два трека по очереди
+  const music = document.getElementById('bgMusic');
+  const musicBtn = document.getElementById('musicToggleButton');
+  const tracks = ['audio/music1.mp3', 'audio/music2.mp3'];
+  let currentTrack = 0;
+  let musicStarted = false;
+  function playCurrentTrack() {
+    if (!music) return;
+    music.src = tracks[currentTrack];
+    music.currentTime = 0;
+    music.play().catch(()=>{});
+  }
+  function startMusicOnUserAction() {
+    if (musicStarted) return;
+    musicStarted = true;
+    playCurrentTrack();
+  }
+  if (music) {
+    music.volume = 0.5;
+    music.muted = false;
+    // Не запускаем playCurrentTrack() сразу
+    music.onended = () => {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      playCurrentTrack();
+    };
+    // Слушаем первое взаимодействие пользователя
+    window.addEventListener('click', startMusicOnUserAction, { once: true });
+    window.addEventListener('keydown', startMusicOnUserAction, { once: true });
+  }
+  if (musicBtn) {
+    musicBtn.onclick = () => {
+      if (!music) return;
+      music.muted = !music.muted;
+      musicBtn.textContent = music.muted ? 'Music Off' : 'Music On';
+    };
+    if (music) musicBtn.textContent = music.muted ? 'Music Off' : 'Music On';
+  }
   // Скрываем кнопку Play Again при старте
   const replayBtn = document.getElementById('replayButton');
   if (replayBtn) replayBtn.style.display = 'none';
@@ -554,6 +619,15 @@ async function initGame() {
   // Обработчик для Play Again
   if (replayBtn) {
     replayBtn.onclick = () => {
+      // Останавливаем победную/проигрышную музыку
+      const victoryMusic = document.getElementById('victoryMusic');
+      const defeatMusic = document.getElementById('defeatMusic');
+      if (victoryMusic) victoryMusic.pause();
+      if (defeatMusic) defeatMusic.pause();
+      if (music) {
+        music.currentTime = 0;
+        music.muted = false;
+      }
       location.reload();
     };
   }

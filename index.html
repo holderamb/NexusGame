@@ -14,11 +14,17 @@
       <span>Your base HP: <span id="playerBaseHpDisplay">0</span></span>
       <span>Enemy base HP: <span id="enemyBaseHpDisplay">0</span></span>
       <button id="ageUpButton">Advance to Age 2 (250 gold)</button>
+      <button id="musicToggleButton" style="margin-left:20px;">Music On</button>
     </div>
     <div id="unit-buttons-container"></div>
     <canvas id="gameCanvas" width="1100" height="420"></canvas>
     <button id="replayButton" style="display:none;font-size:20px;padding:10px 32px;background:#ffd700;color:#222;border-radius:8px;border:2px solid #444;box-shadow:0 2px 8px #0003;cursor:pointer;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;">Play Again</button>
   </div>
+  <audio id="bgMusic" src="" preload="auto" style="display:none"></audio>
+  <audio id="deathSound" src="audio/death.mp3" preload="auto" style="display:none"></audio>
+  <audio id="victoryMusic" src="audio/victory.mp3" preload="auto" style="display:none"></audio>
+  <audio id="defeatMusic" src="audio/defeat.mp3" preload="auto" style="display:none"></audio>
+  <audio id="ageUpSound" src="audio/ageup.mp3" preload="auto" style="display:none"></audio>
   <script src="game.js"></script>
 </body>
 </html>
