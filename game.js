@@ -27,11 +27,11 @@ let enemyAgeUpTimer = 0;
 const ENEMY_AGE_UP_INTERVAL = 30000;
 let enemyPseudoGold = 0;
 let enemySpawnTimer = 0;
-const ENEMY_AI_SPAWN_INTERVAL = 8000;
+const ENEMY_AI_SPAWN_INTERVAL = 4000;
 let goldIncomeTimer = 0;
 const GOLD_INCOME_INTERVAL = 100; // мс
 const GOLD_INCOME_AMOUNT = 1;
-const BASE_ATTACK_DAMAGE = 2;
+const BASE_ATTACK_DAMAGE = 1;
 
 // --- Конфиг эпох и юнитов ---
 const AGE_CONFIG = {
@@ -67,7 +67,8 @@ const PROJECTILE_CONFIG = {
   'stone': { speed: 4, width: 10, height: 10, color: 'rgba(120,120,120,0.6)' },
   'arrow': { speed: 6, width: 14, height: 4, color: 'rgba(60,120,220,0.6)' },
   'bullet':{ speed: 8, width: 10, height: 10, color: 'rgba(220,220,60,0.6)' },
-  'bullet_burst':{ speed: 8, width: 10, height: 10, color: 'rgba(160,60,220,0.6)' }
+  'bullet_burst':{ speed: 8, width: 10, height: 10, color: 'rgba(160,60,220,0.6)' },
+  'turret': { speed: 10, width: 18, height: 18, color: 'rgba(255,215,0,0.85)' }
 };
 const ARCHER_MAX_ALLIES_TO_SHOOT_THROUGH = 2;
 
@@ -121,6 +122,7 @@ class Base {
     this.age = isPlayer ? currentAge : enemyCurrentAge;
     this.imgPath = isPlayer ? AGE_CONFIG[this.age].baseImgPathPlayer : AGE_CONFIG[this.age].baseImgPathEnemy;
     this.image = images[this.imgPath];
+    this.turretLastAttack = 0;
   }
   setHpForAge(age) {
     this.hp = AGE_CONFIG[age].baseHp;
@@ -139,6 +141,45 @@ class Base {
     ctx.font = '18px Arial';
     ctx.textAlign = 'center';
     ctx.fillText(`${this.hp} / ${this.maxHp}`, this.x + this.width/2, this.y + this.height + 20);
+  }
+  turretAttack(units, now) {
+    // Параметры по эпохам
+    const turretConfig = [
+      { dmg: 15, range: 220, speed: 1500 },
+      { dmg: 20, range: 220, speed: 1200 },
+      { dmg: 35, range: 220, speed: 900 }
+    ];
+    const ageIdx = Math.max(0, Math.min(this.age-1, 2));
+    const cfg = turretConfig[ageIdx];
+    if (now - this.turretLastAttack < cfg.speed) return;
+    // Ищем ближайшего врага в радиусе
+    let closest = null, minDist = Infinity;
+    for (const u of units) {
+      if (!u.isAlive) continue;
+      // Центр базы
+      const bx = this.x + this.width/2;
+      const by = this.y + this.height/2;
+      // Центр юнита
+      const ux = u.x + u.width/2;
+      const uy = u.y - u.height/2;
+      const dist = Math.hypot(bx - ux, by - uy);
+      if (dist < cfg.range && dist < minDist) {
+        closest = u; minDist = dist;
+      }
+    }
+    if (closest) {
+      // Создаём снаряд турели
+      projectiles.push(new Projectile(
+        'turret',
+        this.x + this.width/2,
+        this.y + this.height/2,
+        this.isPlayer ? 1 : -1,
+        closest,
+        this.isPlayer,
+        cfg.dmg
+      ));
+      this.turretLastAttack = now;
+    }
   }
 }
 class Unit {
@@ -216,7 +257,11 @@ class Projectile {
     this.x += this.speed;
     if (this.target && Math.abs(this.x - this.target.x) < 20) {
       this.isAlive = false;
-      this.target.hp -= this.damage;
+      if (this.type === 'turret' && this.target.isAlive) {
+        this.target.hp -= this.damage;
+      } else if (this.type !== 'turret') {
+        this.target.hp -= this.damage;
+      }
     }
     if (this.x < 0 || this.x > canvas.width) this.isAlive = false;
   }
@@ -336,7 +381,11 @@ function processPlayerSpawnQueue(deltaTime) {
   }
 }
 function updateEnemyAI(deltaTime) {
-  enemyPseudoGold += deltaTime * (10 + enemyCurrentAge * 2) / 1000;
+  if (enemyCurrentAge < currentAge) {
+    enemyPseudoGold += deltaTime * 2 * (GOLD_INCOME_AMOUNT / GOLD_INCOME_INTERVAL);
+  } else {
+    enemyPseudoGold += deltaTime * (GOLD_INCOME_AMOUNT / GOLD_INCOME_INTERVAL);
+  }
   if (enemyCurrentAge < MAX_AGE) {
     if (enemyPseudoGold >= AGE_CONFIG[enemyCurrentAge].upgradeCost) {
       enemyPseudoGold -= AGE_CONFIG[enemyCurrentAge].upgradeCost;
@@ -363,6 +412,10 @@ function updateGame(deltaTime) {
   const deathSound = document.getElementById('deathSound');
   processPlayerSpawnQueue(deltaTime);
   updateEnemyAI(deltaTime);
+  // Турели баз
+  const now = Date.now();
+  playerBase.turretAttack(enemyUnits, now);
+  enemyBase.turretAttack(playerUnits, now);
   // Units move and attack
   for (const arr of [playerUnits, enemyUnits]) {
     for (let i = 0; i < arr.length; i++) {
