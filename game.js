@@ -38,27 +38,27 @@ const AGE_CONFIG = {
   1: {
     baseHp: 100, upgradeCost: 250,
     units: {
-      'barbarian': { name: 'Варвар', cost: 50, hp: 60, attack: 10, speed: 0.8, range: 1, projectile: null, color: 'sandybrown', imgPathPlayer: 'images/barbarian_player.png', imgPathEnemy: 'images/barbarian_enemy.png', width: 30, height: 50 },
-      'thrower':   { name: 'Бросальщик', cost: 70, hp: 35, attack: 12, speed: 0.6, range: 120, projectile: 'stone', attackSpeed: 1800, color: 'peru', imgPathPlayer: 'images/thrower_player.png', imgPathEnemy: 'images/thrower_enemy.png', width: 30, height: 50 }
+      'barbarian': { name: 'Barbarian', cost: 50, hp: 60, attack: 10, speed: 0.8, range: 1, projectile: null, color: 'sandybrown', imgPathPlayer: 'images/barbarian_player.png', imgPathEnemy: 'images/barbarian_enemy.png', width: 52, height: 85 },
+      'thrower':   { name: 'Thrower', cost: 70, hp: 35, attack: 12, speed: 0.6, range: 120, projectile: 'stone', attackSpeed: 1800, color: 'peru', imgPathPlayer: 'images/thrower_player.png', imgPathEnemy: 'images/thrower_enemy.png', width: 52, height: 85 }
     },
     baseImgPathPlayer: 'images/base_age1_player.png', baseImgPathEnemy: 'images/base_age1_enemy.png'
   },
   2: {
     baseHp: 200, upgradeCost: 500,
     units: {
-      'spearman': { name: 'Копейщик', cost: 80, hp: 50, attack: 18, speed: 0.7, range: 40, projectile: null, color: 'silver', imgPathPlayer: 'images/spearman_player.png', imgPathEnemy: 'images/spearman_enemy.png', width: 35, height: 55 },
-      'swordsman':{ name: 'Мечник', cost: 60, hp: 80, attack: 15, speed: 0.7, range: 1, projectile: null, color: 'lightblue', imgPathPlayer: 'images/swordsman_player.png', imgPathEnemy: 'images/swordsman_enemy.png', width: 30, height: 50 },
-      'archer':   { name: 'Лучник', cost: 70, hp: 45, attack: 15, speed: 0.6, range: 150, projectile: 'arrow', attackSpeed: 1500, color: 'lightgreen', imgPathPlayer: 'images/archer_player.png', imgPathEnemy: 'images/archer_enemy.png', width: 30, height: 50 }
+      'spearman': { name: 'Spearman', cost: 80, hp: 50, attack: 18, speed: 0.7, range: 40, projectile: null, color: 'silver', imgPathPlayer: 'images/spearman_player.png', imgPathEnemy: 'images/spearman_enemy.png', width: 60, height: 94 },
+      'swordsman':{ name: 'Swordsman', cost: 60, hp: 80, attack: 15, speed: 0.7, range: 1, projectile: null, color: 'lightblue', imgPathPlayer: 'images/swordsman_player.png', imgPathEnemy: 'images/swordsman_enemy.png', width: 52, height: 85 },
+      'archer':   { name: 'Archer', cost: 70, hp: 45, attack: 15, speed: 0.6, range: 150, projectile: 'arrow', attackSpeed: 1500, color: 'lightgreen', imgPathPlayer: 'images/archer_player.png', imgPathEnemy: 'images/archer_enemy.png', width: 52, height: 85 }
     },
     baseImgPathPlayer: 'images/base_age2_player.png', baseImgPathEnemy: 'images/base_age2_enemy.png'
   },
   3: {
     baseHp: 300, upgradeCost: Infinity,
     units: {
-      'armored':  { name: 'Броневик', cost: 80, hp: 150, attack: 20, speed: 0.5, range: 1, projectile: null, color: 'dimgray', imgPathPlayer: 'images/armored_player.png', imgPathEnemy: 'images/armored_enemy.png', width: 40, height: 60 },
-      'knifeman': { name: 'Ножевик', cost: 50, hp: 60, attack: 25, speed: 0.9, range: 1, projectile: null, color: 'crimson', imgPathPlayer: 'images/knifeman_player.png', imgPathEnemy: 'images/knifeman_enemy.png', width: 30, height: 50 },
-      'pistoleer':{ name: 'Пистолетчик', cost: 90, hp: 55, attack: 30, speed: 0.7, range: 180, projectile: 'bullet', attackSpeed: 1000, color: 'gold', imgPathPlayer: 'images/pistoleer_player.png', imgPathEnemy: 'images/pistoleer_enemy.png', width: 30, height: 50 },
-      'rifleman': { name: 'Автоматчик', cost: 120, hp: 70, attack: 40, speed: 0.6, range: 200, projectile: 'bullet_burst', attackSpeed: 800, color: 'olive', imgPathPlayer: 'images/rifleman_player.png', imgPathEnemy: 'images/rifleman_enemy.png', width: 30, height: 50 }
+      'armored':  { name: 'Armored', cost: 80, hp: 150, attack: 20, speed: 0.5, range: 1, projectile: null, color: 'dimgray', imgPathPlayer: 'images/armored_player.png', imgPathEnemy: 'images/armored_enemy.png', width: 68, height: 102 },
+      'knifeman': { name: 'Knifeman', cost: 50, hp: 60, attack: 25, speed: 0.9, range: 1, projectile: null, color: 'crimson', imgPathPlayer: 'images/knifeman_player.png', imgPathEnemy: 'images/knifeman_enemy.png', width: 52, height: 85 },
+      'pistoleer':{ name: 'Pistoleer', cost: 90, hp: 55, attack: 30, speed: 0.7, range: 180, projectile: 'bullet', attackSpeed: 1000, color: 'gold', imgPathPlayer: 'images/pistoleer_player.png', imgPathEnemy: 'images/pistoleer_enemy.png', width: 52, height: 85 },
+      'rifleman': { name: 'Rifleman', cost: 120, hp: 70, attack: 40, speed: 0.6, range: 200, projectile: 'bullet_burst', attackSpeed: 800, color: 'olive', imgPathPlayer: 'images/rifleman_player.png', imgPathEnemy: 'images/rifleman_enemy.png', width: 52, height: 85 }
     },
     baseImgPathPlayer: 'images/base_age3_player.png', baseImgPathEnemy: 'images/base_age3_enemy.png'
   }
@@ -112,12 +112,12 @@ async function loadAllGameImages() {
 class Base {
   constructor(x, y, hp, isPlayer) {
     this.x = x;
-    this.y = y - 80;
+    this.y = y - 136; // 80 * 1.7
     this.hp = hp;
     this.maxHp = hp;
     this.isPlayer = isPlayer;
-    this.width = 80;
-    this.height = 80;
+    this.width = 136; // 80 * 1.7
+    this.height = 136; // 80 * 1.7
     this.age = isPlayer ? currentAge : enemyCurrentAge;
     this.imgPath = isPlayer ? AGE_CONFIG[this.age].baseImgPathPlayer : AGE_CONFIG[this.age].baseImgPathEnemy;
     this.image = images[this.imgPath];
@@ -136,9 +136,9 @@ class Base {
       ctx.fillRect(this.x, this.y, this.width, this.height);
     }
     ctx.fillStyle = '#fff';
-    ctx.font = '14px Arial';
+    ctx.font = '18px Arial';
     ctx.textAlign = 'center';
-    ctx.fillText(`${this.hp} / ${this.maxHp}`, this.x + this.width/2, this.y + this.height + 16);
+    ctx.fillText(`${this.hp} / ${this.maxHp}`, this.x + this.width/2, this.y + this.height + 20);
   }
 }
 class Unit {
@@ -167,10 +167,28 @@ class Unit {
     this.isAttackingBase = false;
   }
   draw() {
-    if (this.image) ctx.drawImage(this.image, this.x, this.y - this.height, this.width, this.height);
-    else {
-      ctx.fillStyle = this.color;
-      ctx.fillRect(this.x, this.y - this.height, this.width, this.height);
+    if (this.image) {
+      if (!this.isPlayer) {
+        ctx.save();
+        ctx.translate(this.x + this.width / 2, this.y - this.height / 2);
+        ctx.scale(-1, 1);
+        ctx.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
+        ctx.restore();
+      } else {
+        ctx.drawImage(this.image, this.x, this.y - this.height, this.width, this.height);
+      }
+    } else {
+      if (!this.isPlayer) {
+        ctx.save();
+        ctx.translate(this.x + this.width / 2, this.y - this.height / 2);
+        ctx.scale(-1, 1);
+        ctx.fillStyle = this.color;
+        ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
+        ctx.restore();
+      } else {
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y - this.height, this.width, this.height);
+      }
     }
     ctx.fillStyle = '#fff';
     ctx.font = '12px Arial';
@@ -235,7 +253,7 @@ function updateUnitButtons() {
 }
 function updateAgeUpButtonText() {
   if (currentAge < MAX_AGE) {
-    ageUpButtonElement.textContent = `Переход в эпоху ${currentAge+1} (${AGE_CONFIG[currentAge].upgradeCost} золота)`;
+    ageUpButtonElement.textContent = `Advance to Age ${currentAge+1} (${AGE_CONFIG[currentAge].upgradeCost} gold)`;
     if (gold < AGE_CONFIG[currentAge].upgradeCost) {
       ageUpButtonElement.style.opacity = '0.6';
       ageUpButtonElement.style.cursor = 'not-allowed';
@@ -244,20 +262,18 @@ function updateAgeUpButtonText() {
       ageUpButtonElement.style.cursor = 'pointer';
     }
   } else {
-    ageUpButtonElement.textContent = 'Максимальная эпоха';
+    ageUpButtonElement.textContent = 'Max Age Reached';
     ageUpButtonElement.style.opacity = '0.6';
     ageUpButtonElement.style.cursor = 'not-allowed';
   }
 }
 function setupAgeUpButton() {
   ageUpButtonElement.disabled = false;
-  console.log('setupAgeUpButton called, element:', ageUpButtonElement);
   if (!ageUpButtonElement) {
-    alert('Кнопка перехода эпохи (id="ageUpButton") не найдена в DOM!');
+    alert('Age up button (id="ageUpButton") not found in DOM!');
     return;
   }
   ageUpButtonElement.onclick = () => {
-    console.log('Кнопка перехода эпохи нажата, gold:', gold, 'currentAge:', currentAge);
     if (currentAge < MAX_AGE && gold >= AGE_CONFIG[currentAge].upgradeCost) {
       gold -= AGE_CONFIG[currentAge].upgradeCost;
       currentAge++;
@@ -275,7 +291,7 @@ function setupAgeUpButton() {
         }
       }
     } else if (currentAge < MAX_AGE && gold < AGE_CONFIG[currentAge].upgradeCost) {
-      alert('Недостаточно золота для перехода в новую эпоху!');
+      alert('Not enough gold to advance to the next age!');
     }
   };
   updateAgeUpButtonText();
@@ -286,7 +302,7 @@ function addUnitToPlayerQueue(typeKey) {
     gold -= unitData.cost;
     playerSpawnQueue.push(typeKey);
   } else {
-    alert('Недостаточно золота для найма!');
+    alert('Not enough gold to hire!');
   }
 }
 function isSpawnPointClear(spawnX, unitWidth, existingUnits) {
@@ -472,15 +488,12 @@ function render() {
   projectiles.forEach(p => p.draw());
   // Draw units
   [...playerUnits, ...enemyUnits].forEach(u => u.draw());
-  // Draw projectiles
-  console.log('Projectiles count:', projectiles.length, projectiles);
- 
   // UI overlays
   ctx.fillStyle = 'white';
-  ctx.font = '14px Arial';
+  ctx.font = '18px Arial';
   ctx.textAlign = 'left';
-  ctx.fillText('Очередь: ' + playerSpawnQueue.length, 10, 20);
-  ctx.fillText(`Эпоха: ${currentAge}`, canvas.width - 90, 20);
+  ctx.fillText('Queue: ' + playerSpawnQueue.length, 10, 28);
+  ctx.fillText(`Age: ${currentAge}`, canvas.width - 110, 28);
   if (gameIsOver) {
     ctx.fillStyle = playerWon ? '#4f4' : '#f44';
     ctx.font = '32px Arial';
@@ -491,7 +504,10 @@ function render() {
 function gameOver(playerWin) {
   gameIsOver = true;
   playerWon = playerWin;
-  gameOverMessage = playerWin ? 'Победа!' : 'Поражение!';
+  gameOverMessage = playerWin ? 'Victory!' : 'Defeat!';
+  // Показываем кнопку Play Again
+  const replayBtn = document.getElementById('replayButton');
+  if (replayBtn) replayBtn.style.display = 'block';
 }
 let lastTime = 0;
 function gameLoop(ts) {
@@ -511,7 +527,6 @@ function gameLoop(ts) {
   requestAnimationFrame(gameLoop);
 }
 async function initGame() {
-  console.log('HTML:', document.body.innerHTML);
   canvas = document.getElementById('gameCanvas');
   ctx = canvas.getContext('2d');
   goldDisplay = document.getElementById('goldDisplay');
@@ -519,12 +534,15 @@ async function initGame() {
   enemyBaseHpDisplay = document.getElementById('enemyBaseHpDisplay');
   unitButtonsContainer = document.getElementById('unit-buttons-container');
   ageUpButtonElement = document.getElementById('ageUpButton');
+  // Скрываем кнопку Play Again при старте
+  const replayBtn = document.getElementById('replayButton');
+  if (replayBtn) replayBtn.style.display = 'none';
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'white'; ctx.font = '20px Arial'; ctx.textAlign = 'center';
-  ctx.fillText('Загрузка игры...', canvas.width/2, canvas.height/2);
+  ctx.fillStyle = 'white'; ctx.font = '24px Arial'; ctx.textAlign = 'center';
+  ctx.fillText('Loading game...', canvas.width/2, canvas.height/2);
   await loadAllGameImages();
   playerBase = new Base(0, canvas.height, AGE_CONFIG[currentAge].baseHp, true);
-  enemyBase = new Base(canvas.width - 80, canvas.height, AGE_CONFIG[enemyCurrentAge].baseHp, false);
+  enemyBase = new Base(canvas.width - 136, canvas.height, AGE_CONFIG[enemyCurrentAge].baseHp, false);
   updateUnitButtons();
   setupAgeUpButton();
   unitButtonsContainer.addEventListener('click', (event) => {
@@ -533,6 +551,12 @@ async function initGame() {
       addUnitToPlayerQueue(unitTypeKey);
     }
   });
+  // Обработчик для Play Again
+  if (replayBtn) {
+    replayBtn.onclick = () => {
+      location.reload();
+    };
+  }
   requestAnimationFrame(gameLoop);
 }
 if (document.readyState === 'loading') {

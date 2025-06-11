@@ -10,13 +10,14 @@
   <div id="main-bg"></div>
   <div id="main-wrapper">
     <div id="ui-panel">
-      <span>Золото: <span id="goldDisplay">0</span></span>
-      <span>HP базы игрока: <span id="playerBaseHpDisplay">0</span></span>
-      <span>HP базы врага: <span id="enemyBaseHpDisplay">0</span></span>
-      <button id="ageUpButton">Переход в эпоху 2 (250 золота)</button>
+      <span>Gold: <span id="goldDisplay">0</span></span>
+      <span>Your base HP: <span id="playerBaseHpDisplay">0</span></span>
+      <span>Enemy base HP: <span id="enemyBaseHpDisplay">0</span></span>
+      <button id="ageUpButton">Advance to Age 2 (250 gold)</button>
     </div>
     <div id="unit-buttons-container"></div>
-    <canvas id="gameCanvas" width="800" height="300"></canvas>
+    <canvas id="gameCanvas" width="1100" height="420"></canvas>
+    <button id="replayButton" style="display:none;font-size:20px;padding:10px 32px;background:#ffd700;color:#222;border-radius:8px;border:2px solid #444;box-shadow:0 2px 8px #0003;cursor:pointer;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;">Play Again</button>
   </div>
   <script src="game.js"></script>
 </body>
